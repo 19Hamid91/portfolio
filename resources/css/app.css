@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Fix Tailwind Forms plugin forced styles interfering with Vuetify Inputs */
+.v-application input,
+.v-application textarea,
+.v-application select,
+.v-field input,
+.v-field textarea,
+.v-field select {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.v-application input:focus,
+.v-application textarea:focus,
+.v-application select:focus,
+.v-field input:focus,
+.v-field textarea:focus,
+.v-field select:focus {
+    box-shadow: none !important;
+    border: none !important;
+    outline: none !important;
+}
