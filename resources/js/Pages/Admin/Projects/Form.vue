@@ -9,24 +9,24 @@
         <v-form @submit.prevent="submit">
             <v-row>
                 <v-col cols="12" md="6">
-                    <v-text-field v-model="form.title" label="Project Title" variant="outlined" color="primary" bg-color="rgba(0,0,0,0.2)"></v-text-field>
+                    <v-text-field v-model="form.title" label="Project Title" variant="outlined" color="primary" bg-color="rgba(0,0,0,0.2)" :error-messages="form.errors.title"></v-text-field>
                 </v-col>
                 <v-col cols="12" md="6">
-                    <v-text-field v-model="form.web_link" label="Live Web Link" variant="outlined" color="primary" bg-color="rgba(0,0,0,0.2)"></v-text-field>
+                    <v-text-field v-model="form.web_link" label="Live Web Link" variant="outlined" color="primary" bg-color="rgba(0,0,0,0.2)" :error-messages="form.errors.web_link"></v-text-field>
                 </v-col>
                 <v-col cols="12">
                     <p class="text-subtitle-2 mb-2 text-grey-lighten-1">Thumbnail Source (Choose File or URL)</p>
                     <v-row>
                         <v-col cols="12" sm="6">
-                            <v-file-input v-model="form.thumbnail" label="Upload Thumbnail" accept="image/*" variant="outlined" color="primary" prepend-inner-icon="mdi-image" prepend-icon=""></v-file-input>
+                            <v-file-input v-model="form.thumbnail" label="Upload Thumbnail" accept="image/*" variant="outlined" color="primary" prepend-inner-icon="mdi-image" prepend-icon="" :error-messages="form.errors.thumbnail"></v-file-input>
                         </v-col>
                         <v-col cols="12" sm="6">
-                            <v-text-field v-model="form.thumbnail_url" label="OR Direct URL" placeholder="https://..." variant="outlined" color="primary"></v-text-field>
+                            <v-text-field v-model="form.thumbnail_url" label="OR Direct URL" placeholder="https://..." variant="outlined" color="primary" :error-messages="form.errors.thumbnail_url"></v-text-field>
                         </v-col>
                     </v-row>
                 </v-col>
                 <v-col cols="12">
-                    <v-textarea v-model="form.description" label="Project Overview / Description" rows="6" variant="outlined" color="primary" bg-color="rgba(0,0,0,0.2)"></v-textarea>
+                    <v-textarea v-model="form.description" label="Project Overview / Description" rows="6" variant="outlined" color="primary" bg-color="rgba(0,0,0,0.2)" :error-messages="form.errors.description"></v-textarea>
                 </v-col>
                 <v-col cols="12">
                      <v-select 
@@ -40,6 +40,7 @@
                         variant="outlined"
                         color="primary"
                         bg-color="rgba(0,0,0,0.2)"
+                        :error-messages="form.errors.technologies"
                      ></v-select>
                 </v-col>
             </v-row>

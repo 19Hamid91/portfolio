@@ -39,10 +39,10 @@ class DatabaseSeeder extends Seeder
         );
 
         // Existing 4 Techs
-        $tech1 = Technology::firstOrCreate(['name' => 'Laravel'], ['icon_url' => 'https://raw.githubusercontent.com/devicons/devicon/master/icons/laravel/laravel-plain.svg']);
+        $tech1 = Technology::firstOrCreate(['name' => 'Laravel'], ['icon_url' => 'https://raw.githubusercontent.com/devicons/devicon/master/icons/laravel/laravel-original.svg']);
         $tech2 = Technology::firstOrCreate(['name' => 'Vue.js'], ['icon_url' => 'https://raw.githubusercontent.com/devicons/devicon/master/icons/vuejs/vuejs-original.svg']);
         $tech3 = Technology::firstOrCreate(['name' => 'Vuetify'], ['icon_url' => 'https://raw.githubusercontent.com/devicons/devicon/master/icons/vuetify/vuetify-original.svg']);
-        $tech4 = Technology::firstOrCreate(['name' => 'Tailwind CSS'], ['icon_url' => 'https://raw.githubusercontent.com/devicons/devicon/master/icons/tailwindcss/tailwindcss-plain.svg']);
+        $tech4 = Technology::firstOrCreate(['name' => 'Tailwind CSS'], ['icon_url' => 'https://raw.githubusercontent.com/devicons/devicon/master/icons/tailwindcss/tailwindcss-original.svg']);
         
         // New Techs
         $tech5 = Technology::firstOrCreate(['name' => 'React'], ['icon_url' => 'https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg']);

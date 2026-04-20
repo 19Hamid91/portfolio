@@ -3,63 +3,39 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\TechnologyRequest;
 use App\Models\Technology;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use App\Services\TechnologyService;
 use Inertia\Inertia;
 
 class TechnologyController extends Controller
 {
+    public function __construct(
+        protected TechnologyService $service
+    ) {}
+
     public function index()
     {
-        $technologies = Technology::all();
         return Inertia::render('Admin/Technologies/Index', [
-            'technologies' => $technologies
+            'technologies' => $this->service->getAllTechnologies()
         ]);
     }
 
-    public function store(Request $request)
+    public function store(TechnologyRequest $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'icon' => 'nullable|image|max:2048',
-            'icon_url' => 'nullable|string'
-        ]);
-
-        if ($request->hasFile('icon')) {
-            $path = $request->file('icon')->store('icons', 'public');
-            $validated['icon_url'] = '/storage/' . $path;
-        }
-
-        Technology::create($validated);
+        $this->service->createTechnology($request->validated());
         return redirect()->back()->with('message', 'Technology added successfully.');
     }
 
-    public function update(Request $request, Technology $technology)
+    public function update(TechnologyRequest $request, Technology $technology)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'icon' => 'nullable|image|max:1024'
-        ]);
-
-        if ($request->hasFile('icon')) {
-            if ($technology->icon_url) {
-                Storage::disk('public')->delete(str_replace('/storage/', '', $technology->icon_url));
-            }
-            $path = $request->file('icon')->store('icons', 'public');
-            $validated['icon_url'] = '/storage/' . $path;
-        }
-
-        $technology->update($validated);
+        $this->service->updateTechnology($technology, $request->validated());
         return redirect()->back()->with('message', 'Technology updated successfully.');
     }
 
     public function destroy(Technology $technology)
     {
-        if ($technology->icon_url) {
-            Storage::disk('public')->delete(str_replace('/storage/', '', $technology->icon_url));
-        }
-        $technology->delete();
+        $this->service->deleteTechnology($technology);
         return redirect()->back()->with('message', 'Technology deleted successfully.');
     }
 }

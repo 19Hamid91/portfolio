@@ -3,52 +3,36 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\ProjectRequest;
 use App\Models\Project;
 use App\Models\Technology;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use App\Services\ProjectService;
 use Inertia\Inertia;
 
 class ProjectController extends Controller
 {
+    public function __construct(
+        protected ProjectService $service
+    ) {}
+
     public function index()
     {
-        $projects = Project::with('technologies')->latest()->get();
         return Inertia::render('Admin/Projects/Index', [
-            'projects' => $projects
+            'projects' => $this->service->getAllProjects()
         ]);
     }
 
     public function create()
     {
-        $technologies = Technology::all();
         return Inertia::render('Admin/Projects/Form', [
-            'technologies' => $technologies,
+            'technologies' => Technology::all(),
             'project' => new Project()
         ]);
     }
 
-    public function store(Request $request)
+    public function store(ProjectRequest $request)
     {
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'web_link' => 'nullable|url',
-            'thumbnail' => 'nullable|image|max:2048',
-            'thumbnail_url' => 'nullable|string',
-            'technologies' => 'array'
-        ]);
-
-        if ($request->hasFile('thumbnail')) {
-            $path = $request->file('thumbnail')->store('thumbnails', 'public');
-            $validated['thumbnail_url'] = '/storage/' . $path;
-        }
-
-        $project = Project::create($validated);
-        
-        if (isset($validated['technologies'])) {
-            $project->technologies()->sync($validated['technologies']);
-        }
+        $this->service->createProject($request->validated());
 
         return redirect()->route('admin.projects.index')->with('message', 'Project created successfully.');
     }
@@ -56,50 +40,23 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $project->load('technologies');
-        $technologies = Technology::all();
         
         return Inertia::render('Admin/Projects/Form', [
             'project' => $project,
-            'technologies' => $technologies
+            'technologies' => Technology::all()
         ]);
     }
 
-    public function update(Request $request, Project $project)
+    public function update(ProjectRequest $request, Project $project)
     {
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'web_link' => 'nullable|url',
-            'thumbnail' => 'nullable|image|max:2048',
-            'thumbnail_url' => 'nullable|string',
-            'technologies' => 'array'
-        ]);
-
-        if ($request->hasFile('thumbnail')) {
-            if ($project->thumbnail_url) {
-                Storage::disk('public')->delete(str_replace('/storage/', '', $project->thumbnail_url));
-            }
-            $path = $request->file('thumbnail')->store('thumbnails', 'public');
-            $validated['thumbnail_url'] = '/storage/' . $path;
-        }
-
-        $project->update($validated);
-        
-        if (isset($validated['technologies'])) {
-            $project->technologies()->sync($validated['technologies']);
-        } else {
-            $project->technologies()->detach();
-        }
+        $this->service->updateProject($project, $request->validated());
 
         return redirect()->route('admin.projects.index')->with('message', 'Project updated successfully.');
     }
 
     public function destroy(Project $project)
     {
-        if ($project->thumbnail_url) {
-            Storage::disk('public')->delete(str_replace('/storage/', '', $project->thumbnail_url));
-        }
-        $project->delete();
+        $this->service->deleteProject($project);
         
         return redirect()->route('admin.projects.index')->with('message', 'Project deleted successfully.');
     }

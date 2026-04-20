@@ -8,12 +8,12 @@
            <v-card class="glass-card rounded-xl border-0 pa-6 mb-6">
                 <h3 class="text-h6 font-weight-bold mb-6 text-white outfit-font">Add New Technology</h3>
                 <v-form @submit.prevent="submit">
-                    <v-text-field v-model="form.name" label="Technology Name" variant="outlined" color="primary" bg-color="rgba(0,0,0,0.2)"></v-text-field>
+                    <v-text-field v-model="form.name" label="Technology Name" variant="outlined" color="primary" bg-color="rgba(0,0,0,0.2)" :error-messages="form.errors.name"></v-text-field>
                     
                     <p class="text-subtitle-2 mb-2 text-grey-lighten-1">Icon Source (Upload or URL)</p>
-                    <v-file-input v-model="form.icon" label="Upload Image" accept="image/*" variant="outlined" color="primary" prepend-inner-icon="mdi-image" prepend-icon="" density="compact"></v-file-input>
+                    <v-file-input v-model="form.icon" label="Upload Image" accept="image/*" variant="outlined" color="primary" prepend-inner-icon="mdi-image" prepend-icon="" density="compact" :error-messages="form.errors.icon"></v-file-input>
                     <div class="text-center text-caption my-1 text-grey-lighten-1">- OR -</div>
-                    <v-text-field v-model="form.icon_url" label="Direct URL (SVG/PNG)" variant="outlined" color="primary" density="compact"></v-text-field>
+                    <v-text-field v-model="form.icon_url" label="Direct URL (SVG/PNG)" variant="outlined" color="primary" density="compact" :error-messages="form.errors.icon_url"></v-text-field>
                     
                     <v-btn type="submit" color="primary" block rounded="pill" class="font-weight-bold mt-2" :loading="form.processing">Save Protocol</v-btn>
                 </v-form>
