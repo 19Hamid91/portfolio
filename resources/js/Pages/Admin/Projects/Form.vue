@@ -3,7 +3,7 @@
     <Head :title="isEditing ? 'Edit Project' : 'New Project'" />
     <template #header>{{ isEditing ? 'Edit Project' : 'New Project' }}</template>
 
-    <v-card class="glass-card rounded-xl border-0 pa-8 mx-auto" max-width="1000">
+    <AdminCard pa="8" maxWidth="1000" class="mx-auto">
         <h3 class="text-h5 font-weight-bold mb-6 text-white outfit-font">{{ isEditing ? 'Edit' : 'Create' }} Project details</h3>
         
         <v-form @submit.prevent="submit">
@@ -49,12 +49,15 @@
                 <v-btn type="submit" color="primary" rounded="pill" class="px-8 font-weight-bold text-none" size="large" :loading="form.processing" prepend-icon="mdi-content-save">Save Project</v-btn>
             </div>
         </v-form>
-    </v-card>
+    </AdminCard>
   </AuthenticatedLayout>
 </template>
+
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import AdminCard from '@/Components/Admin/AdminCard.vue';
 import { Head, useForm } from '@inertiajs/vue3';
+
 const props = defineProps({ project: Object, technologies: Array });
 const isEditing = !!props.project?.id;
 
@@ -78,6 +81,6 @@ const submit = () => {
     }
 };
 </script>
+
 <style scoped>
-.glass-card { background: rgba(31, 28, 44, 0.4) !important; backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05) !important; box-shadow: 0 10px 30px rgba(0,0,0,0.3) !important; }
 </style>

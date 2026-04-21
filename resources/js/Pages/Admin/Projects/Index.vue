@@ -3,7 +3,7 @@
     <Head title="Manage Projects" />
     <template #header>Manage Projects</template>
     
-    <v-card class="glass-card rounded-xl border-0 pa-6">
+    <AdminCard pa="6">
         <div class="d-flex align-center justify-space-between mb-8">
             <h3 class="text-h5 font-weight-bold text-white outfit-font">All Projects</h3>
             <v-btn color="primary" :href="route('admin.projects.create')" rounded="pill" prepend-icon="mdi-plus" class="font-weight-bold text-none">New Project</v-btn>
@@ -35,19 +35,23 @@
                 </tr>
             </tbody>
         </v-table>
-    </v-card>
+    </AdminCard>
   </AuthenticatedLayout>
 </template>
+
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import AdminCard from '@/Components/Admin/AdminCard.vue';
 import { Head, router } from '@inertiajs/vue3';
+
 defineProps({ projects: Array });
+
 const deleteItem = (id) => {
     if(confirm('Are you sure you want to delete this project?')) {
         router.delete(route('admin.projects.destroy', id));
     }
 };
 </script>
+
 <style scoped>
-.glass-card { background: rgba(31, 28, 44, 0.4) !important; backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05) !important; box-shadow: 0 10px 30px rgba(0,0,0,0.3) !important; }
 </style>
