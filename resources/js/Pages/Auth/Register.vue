@@ -9,22 +9,22 @@
 
             <v-form @submit.prevent="submit">
                 <v-text-field
-                    v-model="form.name" label="Name" variant="outlined" color="primary"
+                    v-model="form.name" label="Name" variant="outlined" color="primary" bg-color="transparent"
                     prepend-inner-icon="mdi-account" :error-messages="form.errors.name" required autofocus
                 ></v-text-field>
 
                 <v-text-field
-                    v-model="form.email" label="Email Address" type="email" variant="outlined" color="primary"
+                    v-model="form.email" label="Email Address" type="email" variant="outlined" color="primary" bg-color="transparent"
                     prepend-inner-icon="mdi-email" :error-messages="form.errors.email" required class="mt-4"
                 ></v-text-field>
 
                 <v-text-field
-                    v-model="form.password" label="Password" type="password" variant="outlined" color="primary"
+                    v-model="form.password" label="Password" type="password" variant="outlined" color="primary" bg-color="transparent"
                     prepend-inner-icon="mdi-lock" :error-messages="form.errors.password" required class="mt-4"
                 ></v-text-field>
 
                 <v-text-field
-                    v-model="form.password_confirmation" label="Confirm Password" type="password" variant="outlined" color="primary"
+                    v-model="form.password_confirmation" label="Confirm Password" type="password" variant="outlined" color="primary" bg-color="transparent"
                     prepend-inner-icon="mdi-lock-check" :error-messages="form.errors.password_confirmation" required class="mt-4"
                 ></v-text-field>
 

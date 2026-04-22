@@ -18,6 +18,7 @@
                     type="email"
                     variant="outlined"
                     color="primary"
+                    bg-color="transparent"
                     prepend-inner-icon="mdi-email"
                     :error-messages="form.errors.email"
                     required
@@ -30,6 +31,7 @@
                     type="password"
                     variant="outlined"
                     color="primary"
+                    bg-color="transparent"
                     prepend-inner-icon="mdi-lock"
                     :error-messages="form.errors.password"
                     required
