@@ -29,7 +29,7 @@ import { Link } from '@inertiajs/vue3';
 .glass-nav {
   background: rgba(13, 17, 23, 0.7) !important;
   backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
 }
 .logo-text {
   background: linear-gradient(to right, #ffffff, #a5b4fc);

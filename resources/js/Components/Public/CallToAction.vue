@@ -6,7 +6,7 @@
         <p class="text-h6 text-grey-lighten-1 mb-10 mx-auto position-relative" style="max-width: 600px; z-index:2; line-height: 1.6;">
            I'm always open to discussing web application design, code architecture, or partnership opportunities. Let's build something awesome.
         </p>
-        <v-btn v-if="email" :href="'mailto:' + email" size="x-large" color="primary" class="rounded-pill px-10 font-weight-bold text-none hover-lift position-relative" style="z-index:2;" prepend-icon="mdi-send">
+        <v-btn v-if="email" :href="'mailto:' + email" size="x-large" color="primary" class="rounded-pill px-10 font-weight-bold text-none hover-lift position-relative primary-btn-glow" style="z-index:2;" prepend-icon="mdi-send">
            Get In Touch
         </v-btn>
      </v-card>
@@ -23,7 +23,11 @@ defineProps({
 .glass-card {
     background: rgba(255, 255, 255, 0.03) !important;
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+.primary-btn-glow {
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.5) !important;
 }
 .hover-lift {
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);

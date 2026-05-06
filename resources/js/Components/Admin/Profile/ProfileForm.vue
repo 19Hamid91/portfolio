@@ -32,6 +32,7 @@
                             accept="image/*" 
                             variant="outlined" 
                             color="primary" 
+                            bg-color="rgba(0,0,0,0.2)" 
                             prepend-inner-icon="mdi-camera" 
                             prepend-icon="" 
                             :error-messages="form.errors.avatar"
@@ -43,6 +44,7 @@
                             label="OR Direct URL" 
                             placeholder="https://..." 
                             variant="outlined" 
+                            bg-color="rgba(0,0,0,0.2)" 
                             color="primary" 
                             :error-messages="form.errors.avatar_url"
                         ></v-text-field>

@@ -30,7 +30,7 @@ defineProps({
 .glass-card {
     background: rgba(255, 255, 255, 0.03) !important;
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
 }
 .hover-lift {
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -41,10 +41,10 @@ defineProps({
 }
 .tech-icon-card {
     background: rgba(255,255,255,0.02) !important;
-    border: 1px solid rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1) !important;
 }
 .tech-icon-card:hover {
     background: rgba(255,255,255,0.05) !important;
-    border: 1px solid rgba(99,102,241,0.3);
+    border: 1px solid rgba(99,102,241,0.5) !important;
 }
 </style>

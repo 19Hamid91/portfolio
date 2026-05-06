@@ -1,11 +1,11 @@
 <template>
   <Link :href="'/projects/' + project.slug" class="text-decoration-none h-100 d-block">
-      <v-card class="glass-card h-100 rounded-xl d-flex flex-column border-0 project-card" :style="`animation-delay: ${index * 0.1}s`">
+      <v-card class="glass-card h-100 rounded-xl d-flex flex-column border project-card" :style="`animation-delay: ${index * 0.1}s`">
          <div class="thumbnail-wrapper overflow-hidden position-relative" style="height: 280px; border-radius: 20px 20px 0 0;">
            <v-img :src="project.thumbnail_url || 'https://via.placeholder.com/600x400'" height="280" cover class="thumbnail-img"></v-img>
            <div class="overlay-grad"></div>
            <div class="view-btn-overlay">
-              <v-btn color="primary" rounded="pill" class="text-none font-weight-bold" prepend-icon="mdi-eye" size="large">View Details</v-btn>
+              <v-btn color="primary" rounded="pill" class="text-none font-weight-bold primary-btn-glow" prepend-icon="mdi-eye" size="large">View Details</v-btn>
            </div>
          </div>
          <v-card-text class="pa-8 d-flex flex-column flex-grow-1">
@@ -40,7 +40,11 @@ defineProps({
 .glass-card {
     background: rgba(255, 255, 255, 0.03) !important;
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+.primary-btn-glow {
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4) !important;
 }
 .project-card {
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);

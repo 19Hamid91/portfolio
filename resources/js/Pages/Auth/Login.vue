@@ -18,7 +18,7 @@
                     type="email"
                     variant="outlined"
                     color="primary"
-                    bg-color="transparent"
+                    bg-color="rgba(0,0,0,0.2)"
                     prepend-inner-icon="mdi-email"
                     :error-messages="form.errors.email"
                     required
@@ -31,7 +31,7 @@
                     type="password"
                     variant="outlined"
                     color="primary"
-                    bg-color="transparent"
+                    bg-color="rgba(0,0,0,0.2)"
                     prepend-inner-icon="mdi-lock"
                     :error-messages="form.errors.password"
                     required
@@ -48,7 +48,7 @@
                     color="primary"
                     rounded="pill"
                     size="x-large"
-                    class="font-weight-bold tracking-widest text-none"
+                    class="font-weight-bold tracking-widest text-none primary-btn-glow"
                     :loading="form.processing"
                 >
                     Log in
@@ -70,9 +70,14 @@ const submit = () => { form.post(route('login'), { onFinish: () => form.reset('p
 
 <style scoped>
 .glass-card {
-  background: rgba(31, 28, 44, 0.7) !important;
-  backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  background: rgba(31, 28, 44, 0.6) !important;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
+}
+.primary-btn-glow {
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4) !important;
 }
 .logo-text {
   background: linear-gradient(to right, #ffffff, #a5b4fc);

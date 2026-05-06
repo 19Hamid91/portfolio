@@ -21,7 +21,7 @@
            </p>
            
            <div class="d-flex flex-wrap gap-4 justify-center justify-md-start">
-              <v-btn size="x-large" color="primary" class="rounded-pill px-8 font-weight-bold hover-lift text-none mb-3 mb-sm-0" elevation="8" @click="$emit('scroll-to-projects')">
+              <v-btn size="x-large" color="primary" class="rounded-pill px-8 font-weight-bold hover-lift text-none mb-3 mb-sm-0 primary-btn-glow" elevation="8" @click="$emit('scroll-to-projects')">
                  Explore My Work <v-icon end>mdi-arrow-down</v-icon>
               </v-btn>
               <div class="d-flex gap-3">
@@ -72,11 +72,16 @@ defineEmits(['scroll-to-projects']);
 .glass-btn {
     background: rgba(255, 255, 255, 0.05) !important;
     backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
 }
 .glass-card {
     background: rgba(255, 255, 255, 0.03) !important;
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+.primary-btn-glow {
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.5) !important;
 }
 .hover-lift {
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);

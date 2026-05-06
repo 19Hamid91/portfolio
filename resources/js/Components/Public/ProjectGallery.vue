@@ -108,7 +108,7 @@ const filteredProjects = computed(() => {
 .glass-card {
     background: rgba(255, 255, 255, 0.03) !important;
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
 }
 .hover-lift {
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);

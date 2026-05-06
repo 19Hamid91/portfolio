@@ -9,22 +9,22 @@
 
             <v-form @submit.prevent="submit">
                 <v-text-field
-                    v-model="form.name" label="Name" variant="outlined" color="primary" bg-color="transparent"
+                    v-model="form.name" label="Name" variant="outlined" color="primary" bg-color="rgba(0,0,0,0.2)"
                     prepend-inner-icon="mdi-account" :error-messages="form.errors.name" required autofocus
                 ></v-text-field>
 
                 <v-text-field
-                    v-model="form.email" label="Email Address" type="email" variant="outlined" color="primary" bg-color="transparent"
+                    v-model="form.email" label="Email Address" type="email" variant="outlined" color="primary" bg-color="rgba(0,0,0,0.2)"
                     prepend-inner-icon="mdi-email" :error-messages="form.errors.email" required class="mt-4"
                 ></v-text-field>
 
                 <v-text-field
-                    v-model="form.password" label="Password" type="password" variant="outlined" color="primary" bg-color="transparent"
+                    v-model="form.password" label="Password" type="password" variant="outlined" color="primary" bg-color="rgba(0,0,0,0.2)"
                     prepend-inner-icon="mdi-lock" :error-messages="form.errors.password" required class="mt-4"
                 ></v-text-field>
 
                 <v-text-field
-                    v-model="form.password_confirmation" label="Confirm Password" type="password" variant="outlined" color="primary" bg-color="transparent"
+                    v-model="form.password_confirmation" label="Confirm Password" type="password" variant="outlined" color="primary" bg-color="rgba(0,0,0,0.2)"
                     prepend-inner-icon="mdi-lock-check" :error-messages="form.errors.password_confirmation" required class="mt-4"
                 ></v-text-field>
 
@@ -32,7 +32,7 @@
                     <Link :href="route('login')" class="text-primary text-decoration-none text-subtitle-1 hover-underline">Already registered?</Link>
                 </div>
 
-                <v-btn type="submit" block color="primary" rounded="pill" size="x-large" class="font-weight-bold tracking-widest text-none" :loading="form.processing">Register</v-btn>
+                <v-btn type="submit" block color="primary" rounded="pill" size="x-large" class="font-weight-bold tracking-widest text-none primary-btn-glow" :loading="form.processing">Register</v-btn>
             </v-form>
         </v-card>
     </GuestLayout>
@@ -48,6 +48,15 @@ const submit = () => { form.post(route('register'), { onFinish: () => form.reset
 
 <style scoped>
 .hover-underline:hover { text-decoration: underline !important; }
-.glass-card { background: rgba(31, 28, 44, 0.7) !important; backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.05) !important; }
+.glass-card { 
+    background: rgba(31, 28, 44, 0.6) !important; 
+    backdrop-filter: blur(20px); 
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
+}
+.primary-btn-glow {
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4) !important;
+}
 .logo-text { background: linear-gradient(to right, #ffffff, #a5b4fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 </style>

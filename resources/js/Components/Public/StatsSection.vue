@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-surface-variant py-12 mt-10 border-top border-bottom border-white border-opacity-10" style="background: rgba(0,0,0,0.3) !important;">
+  <div class="bg-surface-variant py-12 mt-10 border-top border-bottom border-white border-opacity-20" style="background: rgba(0,0,0,0.3) !important;">
      <v-container style="max-width: 1200px;">
          <v-row class="text-center">
             <v-col cols="6" md="3" class="mb-4 mb-md-0">

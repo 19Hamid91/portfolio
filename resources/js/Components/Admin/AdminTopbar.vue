@@ -47,12 +47,12 @@ defineEmits(['toggle-drawer']);
 .glass-nav {
   background: rgba(13, 17, 23, 0.7) !important;
   backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
 }
 .glass-card {
   background: rgba(31, 28, 44, 0.9) !important;
   backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
 }
 .hover-lift {
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);

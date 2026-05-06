@@ -18,10 +18,10 @@
                     <p class="text-subtitle-2 mb-2 text-grey-lighten-1">Thumbnail Source (Choose File or URL)</p>
                     <v-row>
                         <v-col cols="12" sm="6">
-                            <v-file-input v-model="form.thumbnail" label="Upload Thumbnail" accept="image/*" variant="outlined" color="primary" prepend-inner-icon="mdi-image" prepend-icon="" :error-messages="form.errors.thumbnail"></v-file-input>
+                            <v-file-input v-model="form.thumbnail" label="Upload Thumbnail" accept="image/*" variant="outlined" color="primary" prepend-inner-icon="mdi-image" prepend-icon="" :error-messages="form.errors.thumbnail" bg-color="rgba(0,0,0,0.2)"></v-file-input>
                         </v-col>
                         <v-col cols="12" sm="6">
-                            <v-text-field v-model="form.thumbnail_url" label="OR Direct URL" placeholder="https://..." variant="outlined" color="primary" :error-messages="form.errors.thumbnail_url"></v-text-field>
+                            <v-text-field v-model="form.thumbnail_url" label="Direct URL Image" variant="outlined" color="primary" bg-color="rgba(0,0,0,0.2)" :error-messages="form.errors.thumbnail_url"></v-text-field>
                         </v-col>
                     </v-row>
                 </v-col>
@@ -45,8 +45,15 @@
                 </v-col>
             </v-row>
             <div class="mt-6 text-right">
-                <v-btn :href="route('admin.projects.index')" variant="text" color="grey-lighten-1" class="mr-4 text-none">Cancel</v-btn>
-                <v-btn type="submit" color="primary" rounded="pill" class="px-8 font-weight-bold text-none" size="large" :loading="form.processing" prepend-icon="mdi-content-save">Save Project</v-btn>
+               <v-btn 
+                :href="route('admin.projects.index')" 
+                variant="outlined" 
+                color="primary" 
+                rounded="pill" 
+                class="mr-4 font-weight-bold text-none px-6"
+                >Cancel</v-btn>
+                
+                <v-btn type="submit" color="primary" rounded="pill" class="px-8 font-weight-bold text-none" size="large" :loading="form.processing" :class="{ 'primary-btn-glow': !form.processing }">{{ isEditing ? 'Update Project' : 'Save Project' }}</v-btn>
             </div>
         </v-form>
     </AdminCard>
@@ -83,4 +90,8 @@ const submit = () => {
 </script>
 
 <style scoped>
+.primary-btn-glow {
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4) !important;
+}
 </style>
