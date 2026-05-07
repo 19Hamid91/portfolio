@@ -51,6 +51,11 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
           cd ${{ secrets.REMOTE_TARGET }}
+          if [ ! -f .env ]; then
+            cp .env.example .env
+            php artisan key:generate
+          fi
+          sed -i "s|APP_URL=.*|APP_URL=https://${{ secrets.DOMAIN_NAME }}|" .env
           php artisan migrate --force
           php artisan optimize
           php artisan view:cache
