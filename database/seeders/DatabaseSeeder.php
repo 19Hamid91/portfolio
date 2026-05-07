@@ -17,24 +17,24 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Caveman Make User
+        // Single Admin User
         User::updateOrCreate(
-            ['email' => 'admin@admin.com'],
+            ['email' => 'hamid@gmail.com'],
             [
-                'name' => 'Caveman Admin',
-                'password' => Hash::make('password'),
+                'name' => 'Hamid',
+                'password' => Hash::make('hamid123'),
             ]
         );
 
-        // Caveman Make Profile
+        // Admin Profile
         Profile::updateOrCreate(
-            ['email' => 'admin@admin.com'],
+            ['email' => 'abdurrahmanhamid91@gmail.com'],
             [
-                'full_name' => 'Ugga Booga',
-                'avatar_url' => 'https://api.dicebear.com/7.x/adventurer/svg?seed=Ugga',
-                'bio' => 'Me write code. Me make fire. Me build fast app.',
-                'github_url' => 'https://github.com',
-                'linkedin_url' => 'https://linkedin.com',
+                'full_name' => 'Abdurrahman Hamid',
+                'avatar_url' => 'https://api.dicebear.com/7.x/adventurer/svg?seed=Admin',
+                'bio' => 'Fullstack Developer specializing in Laravel and Vue.js.',
+                'github_url' => 'https://github.com/19Hamid91',
+                'linkedin_url' => 'https://www.linkedin.com/in/abdurrahman-hamid/',
             ]
         );
 
