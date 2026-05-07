@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [ "production" ]
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -17,11 +20,12 @@ jobs:
       uses: shivammathur/setup-php@v2
       with:
         php-version: '8.2'
+        extensions: mbstring, xml, ctype, iconv, mysql
 
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '20'
+        node-version: '24'
 
     - name: Build Assets (GitHub Runner)
       run: |
@@ -29,18 +33,18 @@ jobs:
         npm install
         npm run build
 
-    - name: Sync Files to Server (Rsync)
-      uses: easingthemes/ssh-deploy@main
+    - name: Sync Files to Server (SFTP)
+      uses: appleboy/scp-action@v0.1.7
       with:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-          REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          TARGET: ${{ secrets.REMOTE_TARGET }}
-          ARGS: "-avzr --delete"
-          EXCLUDE: "/node_modules/, /.git/, /storage/logs/, /storage/framework/sessions/, .env"
+        host: ${{ secrets.REMOTE_HOST }}
+        username: ${{ secrets.REMOTE_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        source: "./*,!.git,!.github,!node_modules,!storage/logs/*,!.env"
+        target: ${{ secrets.REMOTE_TARGET }}
+        strip_components: 0
 
     - name: Post Deploy (Artisan Commands)
-      uses: appleboy/ssh-action@master
+      uses: appleboy/ssh-action@v1.0.3
       with:
         host: ${{ secrets.REMOTE_HOST }}
         username: ${{ secrets.REMOTE_USER }}
