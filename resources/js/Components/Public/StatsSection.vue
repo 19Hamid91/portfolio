@@ -11,7 +11,7 @@
                <p class="text-subtitle-1 text-grey font-weight-medium">Projects Built</p>
             </v-col>
             <v-col cols="6" md="3">
-               <h2 class="text-h3 font-weight-black gradient-text outfit-font">20+</h2>
+               <h2 class="text-h3 font-weight-black gradient-text outfit-font">{{ techCount }}+</h2>
                <p class="text-subtitle-1 text-grey font-weight-medium">Tools & Skills</p>
             </v-col>
             <v-col cols="6" md="3">
@@ -26,6 +26,10 @@
 <script setup>
 defineProps({
     projectCount: {
+        type: Number,
+        default: 0
+    },
+    techCount: {
         type: Number,
         default: 0
     }

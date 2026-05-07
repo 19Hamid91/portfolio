@@ -6,7 +6,10 @@
     <HeroSection :profile="profile" @scroll-to-projects="scrollToProjects" />
 
     <!-- Stats & Divider -->
-    <StatsSection :projectCount="projects?.length || 0" />
+    <StatsSection 
+        :projectCount="projects?.length || 0" 
+        :techCount="technologies?.length || 0" 
+    />
 
     <!-- Tech Stack Section -->
     <TechStackSection :technologies="technologies" />
