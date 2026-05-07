@@ -13,19 +13,40 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Deploy to Server
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2'
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Build Assets (GitHub Runner)
+      run: |
+        composer install --no-dev --optimize-autoloader
+        npm install
+        npm run build
+
+    - name: Sync Files to Server (Rsync)
+      uses: easingthemes/ssh-deploy@main
+      with:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          TARGET: ${{ secrets.REMOTE_TARGET }}
+          ARGS: "-avzr --delete"
+          EXCLUDE: "/node_modules/, /.git/, /storage/logs/, /storage/framework/sessions/, .env"
+
+    - name: Post Deploy (Artisan Commands)
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.REMOTE_HOST }}
         username: ${{ secrets.REMOTE_USER }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
-        port: 22
         script: |
-          cd /var/www/html/nama-folder-kamu
-          git pull origin production
-          composer install --no-dev --optimize-autoloader
-          npm install
-          npm run build
+          cd ${{ secrets.REMOTE_TARGET }}
           php artisan migrate --force
           php artisan optimize
           php artisan view:cache
