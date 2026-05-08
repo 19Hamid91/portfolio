@@ -18,5 +18,8 @@
         "vite": "^5.0",
         "vue": "^3.4.0",
         "vuetify": "^4.0.5"
+    },
+    "dependencies": {
+        "@vueup/vue-quill": "^1.2.0"
     }
 }

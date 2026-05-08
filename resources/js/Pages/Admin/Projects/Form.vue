@@ -26,7 +26,17 @@
                     </v-row>
                 </v-col>
                 <v-col cols="12">
-                    <v-textarea v-model="form.description" label="Project Overview / Description" rows="6" variant="outlined" color="primary" bg-color="rgba(0,0,0,0.2)" :error-messages="form.errors.description"></v-textarea>
+                    <p class="text-subtitle-2 mb-2 text-grey-lighten-1">Project Overview / Description</p>
+                    <div class="editor-container">
+                        <QuillEditor 
+                            v-model:content="form.description" 
+                            content-type="html"
+                            theme="snow" 
+                            toolbar="essential"
+                            placeholder="Describe your project here..."
+                        />
+                    </div>
+                    <div v-if="form.errors.description" class="text-error text-caption mt-1">{{ form.errors.description }}</div>
                 </v-col>
                 <v-col cols="12">
                      <v-select 
@@ -64,6 +74,8 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import AdminCard from '@/Components/Admin/AdminCard.vue';
 import { Head, useForm } from '@inertiajs/vue3';
+import { QuillEditor } from '@vueup/vue-quill'
+import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
 const props = defineProps({ project: Object, technologies: Array });
 const isEditing = !!props.project?.id;
@@ -93,5 +105,47 @@ const submit = () => {
 .primary-btn-glow {
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
   box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4) !important;
+}
+
+.editor-container {
+  background: rgba(0,0,0,0.2);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+:deep(.ql-toolbar) {
+  background: rgba(255,255,255,0.05);
+  border: none !important;
+  border-bottom: 1px solid rgba(255,255,255,0.1) !important;
+}
+
+:deep(.ql-container) {
+  border: none !important;
+  min-height: 200px;
+  font-family: inherit;
+  font-size: 1rem;
+  color: white;
+}
+
+:deep(.ql-editor.ql-blank::before) {
+  color: rgba(255,255,255,0.5);
+  font-style: normal;
+}
+
+:deep(.ql-snow .ql-stroke) {
+  stroke: white;
+}
+
+:deep(.ql-snow .ql-fill) {
+  fill: white;
+}
+
+:deep(.ql-snow .ql-picker) {
+  color: white;
+}
+
+.text-error {
+  color: #ff5252;
 }
 </style>

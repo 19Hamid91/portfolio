@@ -6,8 +6,7 @@
              <h3 class="text-h5 font-weight-bold mb-6 text-white outfit-font d-flex align-center gap-2">
                  <v-icon color="primary">mdi-text-box-outline</v-icon> Overview
              </h3>
-             <div class="text-body-1 text-grey-lighten-1 project-desc">
-                {{ project.description }}
+             <div class="text-body-1 text-grey-lighten-1 project-desc ql-editor" v-html="project.description">
              </div>
           </v-card>
       </v-col>
@@ -40,6 +39,8 @@
 </template>
 
 <script setup>
+import '@vueup/vue-quill/dist/vue-quill.snow.css';
+
 defineProps({
     project: Object
 });
@@ -54,9 +55,14 @@ defineProps({
 }
 
 .project-desc {
-    line-height: 2;
-    white-space: pre-wrap;
-    font-size: 1.15rem;
+    line-height: 1.8;
+    font-size: 1.1rem;
+    text-align: justify;
+}
+
+.project-desc :deep(li), .project-desc :deep(p) {
+    margin-bottom: 0.5rem;
+    text-align: justify;
 }
 
 .tech-item {

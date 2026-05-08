@@ -11,7 +11,7 @@
          <v-card-text class="pa-8 d-flex flex-column flex-grow-1">
             <h3 class="font-weight-black text-h5 text-white mb-3 outfit-font">{{ project.title }}</h3>
             <p class="text-body-1 opacity-80 text-grey-lighten-1 mb-6 flex-grow-1" style="line-height: 1.6;">
-                {{ project.description?.length > 120 ? project.description.substring(0, 120) + '...' : project.description }}
+                {{ stripHtml(project.description)?.length > 120 ? stripHtml(project.description).substring(0, 120) + '...' : stripHtml(project.description) }}
             </p>
             <div class="d-flex flex-wrap gap-2">
                <v-chip v-for="tech in project.technologies.slice(0, 3)" :key="tech.id" size="small" color="white" variant="outlined" class="font-weight-medium bg-white bg-opacity-10 border-opacity-25">
@@ -30,10 +30,15 @@
 <script setup>
 import { Link } from '@inertiajs/vue3';
 
-defineProps({
+const props = defineProps({
     project: Object,
     index: Number
 });
+
+const stripHtml = (html) => {
+    if (!html) return '';
+    return html.replace(/<[^>]*>?/gm, '');
+};
 </script>
 
 <style scoped>
