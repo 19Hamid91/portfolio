@@ -142,7 +142,55 @@ const submit = () => {
 }
 
 :deep(.ql-snow .ql-picker) {
-  color: white;
+  color: #e2e8f0;
+}
+
+:deep(.ql-snow .ql-picker-options) {
+  background-color: #1e1e2e !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5) !important;
+}
+
+:deep(.ql-snow .ql-picker-label) {
+  color: #e2e8f0 !important;
+  background: transparent !important;
+}
+
+:deep(.ql-snow .ql-picker-label:hover) {
+  color: #6366f1 !important;
+}
+
+:deep(.ql-snow .ql-picker-label:hover .ql-stroke) {
+  stroke: #6366f1 !important;
+}
+
+:deep(.ql-snow .ql-picker-item) {
+  color: #e2e8f0 !important;
+}
+
+:deep(.ql-snow .ql-picker-item:hover),
+:deep(.ql-snow .ql-picker-item.ql-selected) {
+  color: #6366f1 !important;
+  background-color: rgba(255,255,255,0.05) !important;
+}
+
+/* Toolbar button hover/active states */
+:deep(.ql-snow.ql-toolbar button:hover),
+:deep(.ql-snow .ql-toolbar button:hover),
+:deep(.ql-snow.ql-toolbar button.ql-active),
+:deep(.ql-snow .ql-toolbar button.ql-active) {
+  color: #6366f1 !important;
+  background-color: rgba(255,255,255,0.1) !important;
+}
+
+:deep(.ql-snow.ql-toolbar button:hover .ql-stroke),
+:deep(.ql-snow.ql-toolbar button.ql-active .ql-stroke) {
+  stroke: #6366f1 !important;
+}
+
+:deep(.ql-snow.ql-toolbar button:hover .ql-fill),
+:deep(.ql-snow.ql-toolbar button.ql-active .ql-fill) {
+  fill: #6366f1 !important;
 }
 
 .text-error {
