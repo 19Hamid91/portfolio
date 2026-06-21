@@ -37,7 +37,7 @@ onMounted(() => {
 
 <style scoped>
 .app-background {
-  background: radial-gradient(circle at top left, #1f1c2c 0%, #0d1117 40%, #0d1117 100%) !important;
+  background-color: #000000 !important;
   min-height: 100vh;
 }
 .main-content {

@@ -1,41 +1,53 @@
 <template>
-  <v-container class="py-12 position-relative" style="margin-top: -60px; z-index: 10;">
-    <v-row>
-      <v-col cols="12" lg="8" md="7">
-          <v-card class="glass-surface pa-6 pa-md-10 rounded-xl mb-8 border-0">
-             <h3 class="text-h5 font-weight-bold mb-6 text-white outfit-font d-flex align-center gap-2">
-                 <v-icon color="primary">mdi-text-box-outline</v-icon> Overview
-             </h3>
-             <div class="text-body-1 text-grey-lighten-1 project-desc ql-editor" v-html="project.description">
-             </div>
-          </v-card>
-      </v-col>
+  <div class="w-full bg-black flex flex-col md:grid md:grid-cols-12 min-h-[50vh] border-b border-brand-border">
+    <!-- Left Column: Case Study Overview -->
+    <div class="col-span-12 md:col-span-8 p-6 md:p-12 lg:p-16 border-b md:border-b-0 md:border-r border-brand-border">
+      <div class="text-xs font-mono uppercase tracking-widest text-brand-muted mb-4">01 / Overview</div>
+      <h3 class="text-2xl md:text-3xl font-serif font-black text-white mb-8">Project Details</h3>
+      
+      <div class="text-sm sm:text-base text-brand-muted leading-relaxed max-w-3xl ql-editor border-t border-brand-border pt-8" v-html="project.description">
+      </div>
+    </div>
 
-      <v-col cols="12" lg="4" md="5">
-          <v-card class="glass-surface pa-8 rounded-xl border-0 sticky-sidebar">
-              <h3 class="text-h5 font-weight-bold mb-6 text-white outfit-font">Tech Stack</h3>
-              
-              <div class="d-flex flex-column gap-4 mb-10">
-                   <div v-for="tech in project.technologies" :key="tech.id" class="tech-item d-flex align-center pa-3 rounded-lg">
-                      <v-avatar size="40" class="mr-4 bg-white pa-1">
-                         <v-img :src="tech.icon_url || 'https://via.placeholder.com/40'" cover></v-img>
-                      </v-avatar>
-                      <span class="text-body-1 font-weight-medium text-white">{{ tech.name }}</span>
-                   </div>
-              </div>
+    <!-- Right Column: Specs & Technical Data -->
+    <div class="col-span-12 md:col-span-4 p-6 md:p-12 lg:p-16 flex flex-col justify-between bg-brand-surface">
+      <div>
+        <div class="text-xs font-mono uppercase tracking-widest text-brand-muted mb-4">02 / Specs</div>
+        <h3 class="text-xl font-serif font-black text-white mb-6">Technologies &amp; Architecture</h3>
+        
+        <!-- Spec Table -->
+        <div class="divide-y divide-brand-border border-t border-b border-brand-border mb-8">
+          <div 
+            v-for="tech in project.technologies" 
+            :key="tech.id" 
+            class="py-3 flex items-center justify-between"
+          >
+            <span class="text-xs font-mono text-white">{{ tech.name }}</span>
+            <img 
+              v-if="tech.icon_url" 
+              :src="tech.icon_url" 
+              :alt="tech.name" 
+              class="w-4 h-4 object-contain grayscale filter brightness-75"
+            />
+            <span v-else class="text-[9px] font-mono text-brand-muted">Utility</span>
+          </div>
+        </div>
+      </div>
 
-              <v-divider class="mb-8 border-opacity-25" color="white"></v-divider>
-
-              <div class="text-center">
-                  <v-btn v-if="project.web_link" :href="project.web_link" target="_blank" color="primary" rounded="pill" block size="x-large" elevation="8" class="font-weight-bold hover-lift text-none">
-                     <v-icon start>mdi-web</v-icon> Visit Live Site
-                  </v-btn>
-                  <p v-else class="text-grey-lighten-1 text-body-2 font-italic mt-4">No live link available</p>
-              </div>
-          </v-card>
-      </v-col>
-    </v-row>
-  </v-container>
+      <!-- Action Area -->
+      <div class="mt-8 border-t border-brand-border pt-8">
+        <a 
+          v-if="project.web_link" 
+          :href="project.web_link" 
+          target="_blank" 
+          class="block text-center border border-primary bg-primary text-black px-6 py-3.5 text-xs font-mono uppercase tracking-widest transition-colors duration-100 hover:bg-primary-hover hover:border-primary-hover cursor-pointer"
+        >
+          Visit Live Site &rarr;
+        </a>
+        <p v-else class="text-xs font-mono text-brand-muted italic">No live demo link available</p>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup>
@@ -47,47 +59,5 @@ defineProps({
 </script>
 
 <style scoped>
-.glass-surface {
-    background: rgba(255, 255, 255, 0.03) !important;
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.05) !important;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2) !important;
-}
-
-.project-desc {
-    line-height: 1.8;
-    font-size: 1.1rem;
-    text-align: justify;
-}
-
-.project-desc :deep(li), .project-desc :deep(p) {
-    margin-bottom: 0.5rem;
-    text-align: justify;
-}
-
-.tech-item {
-    background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(255,255,255,0.05);
-    transition: all 0.3s ease;
-}
-
-.tech-item:hover {
-    background: rgba(99,102,241,0.1);
-    border-color: rgba(99,102,241,0.3);
-    transform: translateX(5px);
-}
-
-.hover-lift {
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-.hover-lift:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4) !important;
-}
-
-.sticky-sidebar {
-    position: sticky;
-    top: 100px;
-}
+/* Clean layouts */
 </style>

@@ -12,7 +12,7 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
 
         <!-- Favicon -->
         <link rel="icon" type="image/png" href="/images/logo.png">
@@ -25,11 +25,11 @@
         <style>
             body {
                 font-family: 'Inter', sans-serif;
-                background-color: #0d1117;
-                color: #c9d1d9;
+                background-color: #000000;
+                color: #FFFFFF;
             }
-            h1, h2, h3, h4, h5, h6, .outfit-font {
-                font-family: 'Outfit', sans-serif;
+            h1, h2, h3, h4, h5, h6 {
+                font-family: 'Playfair Display', serif;
             }
         </style>
     </head>

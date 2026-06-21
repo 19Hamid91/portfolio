@@ -1,15 +1,15 @@
 <template>
-  <v-app theme="dark" class="app-background">
+  <div class="min-h-screen bg-black text-white flex flex-col font-sans selection:bg-white selection:text-black">
     <!-- Navbar -->
     <Navbar />
 
-    <v-main class="main-content">
+    <main class="flex-grow flex flex-col">
       <slot></slot>
-    </v-main>
+    </main>
 
     <!-- Footer -->
     <Footer />
-  </v-app>
+  </div>
 </template>
 
 <script setup>
@@ -18,12 +18,5 @@ import Footer from '@/Components/Public/Footer.vue';
 </script>
 
 <style scoped>
-.app-background {
-  background: radial-gradient(circle at top right, #1f1c2c 0%, #0d1117 40%, #0d1117 100%) !important;
-  min-height: 100vh;
-}
-.main-content {
-  position: relative;
-  z-index: 1;
-}
+/* Scoped overrides if needed */
 </style>

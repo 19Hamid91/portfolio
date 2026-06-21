@@ -3,7 +3,11 @@
     <Head title="Welcome | Portfolio" />
     
     <!-- Hero Section -->
-    <HeroSection :profile="profile" @scroll-to-projects="scrollToProjects" />
+    <HeroSection 
+        :profile="profile" 
+        @scroll-to-projects="scrollToProjects" 
+        @scroll-to-contact="scrollToContact" 
+    />
 
     <!-- Stats & Divider -->
     <StatsSection 
@@ -11,7 +15,10 @@
         :techCount="technologies?.length || 0" 
     />
 
-    <!-- Tech Stack Section -->
+    <!-- About Section -->
+    <AboutSection :profile="profile" />
+
+    <!-- Services / Skills Section -->
     <TechStackSection :technologies="technologies" />
 
     <!-- Projects Section -->
@@ -20,7 +27,11 @@
     </div>
     
     <!-- CTA Section -->
-    <CallToAction :email="profile?.email" />
+    <CallToAction 
+        :email="profile?.email" 
+        :github-url="profile?.github_url" 
+        :linkedin-url="profile?.linkedin_url" 
+    />
   </PublicLayout>
 </template>
 
@@ -29,6 +40,7 @@ import PublicLayout from '@/Layouts/PublicLayout.vue';
 import { Head } from '@inertiajs/vue3';
 import HeroSection from '@/Components/Public/HeroSection.vue';
 import StatsSection from '@/Components/Public/StatsSection.vue';
+import AboutSection from '@/Components/Public/AboutSection.vue';
 import TechStackSection from '@/Components/Public/TechStackSection.vue';
 import ProjectGallery from '@/Components/Public/ProjectGallery.vue';
 import CallToAction from '@/Components/Public/CallToAction.vue';
@@ -41,6 +53,10 @@ defineProps({
 
 const scrollToProjects = () => {
     document.getElementById('projects-section')?.scrollIntoView({ behavior: 'smooth' });
+};
+
+const scrollToContact = () => {
+    document.getElementById('contact-section')?.scrollIntoView({ behavior: 'smooth' });
 };
 </script>
 
