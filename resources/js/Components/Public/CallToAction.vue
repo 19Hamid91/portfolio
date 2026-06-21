@@ -1,54 +1,64 @@
 <template>
-  <v-container class="py-16 mb-16" style="max-width: 1000px;">
-     <v-card class="glass-card rounded-xl pa-10 pa-md-16 text-center border-primary border-opacity-50 relative overflow-hidden" style="border-width: 1px !important;">
-        <div class="blob blob-3"></div>
-        <h2 class="text-h3 text-md-h2 font-weight-black text-white outfit-font mb-6 position-relative" style="z-index:2;">Let's Work Together</h2>
-        <p class="text-h6 text-grey-lighten-1 mb-10 mx-auto position-relative" style="max-width: 600px; z-index:2; line-height: 1.6;">
-           I'm always open to discussing web application design, code architecture, or partnership opportunities. Let's build something awesome.
-        </p>
-        <v-btn v-if="email" :href="'mailto:' + email" size="x-large" color="primary" class="rounded-pill px-10 font-weight-bold text-none hover-lift position-relative primary-btn-glow" style="z-index:2;" prepend-icon="mdi-send">
-           Get In Touch
-        </v-btn>
-     </v-card>
-  </v-container>
+  <section class="w-full border-b border-brand-border bg-black flex flex-col md:grid md:grid-cols-12" id="contact-section">
+    <!-- Left Column: Title -->
+    <div class="col-span-12 md:col-span-6 p-6 md:p-12 lg:p-16 border-b md:border-b-0 md:border-r border-brand-border flex flex-col justify-between">
+      <div>
+        <h4 class="text-xs font-mono uppercase tracking-widest text-brand-muted mb-2">04 / Contact</h4>
+        <h2 class="text-4xl sm:text-5xl font-serif font-black text-white leading-tight">
+          Let's build <br />something.
+        </h2>
+      </div>
+      
+      <p class="text-[10px] font-mono uppercase tracking-widest text-brand-disabled mt-8">
+        Response within 24 hours.
+      </p>
+    </div>
+
+    <!-- Right Column: Copywriting Links -->
+    <div class="col-span-12 md:col-span-6 p-6 md:p-12 lg:p-16 flex flex-col justify-center bg-brand-surface min-h-[300px]">
+      <p class="text-sm font-sans text-brand-muted mb-8 leading-relaxed max-w-lg">
+        Have a project in mind, or just want to talk through an idea? I'm open to freelance work, collaborations, and long-term partnerships.
+      </p>
+      
+      <div v-if="email" class="mb-8">
+        <a 
+          :href="'mailto:' + email"
+          class="inline-block text-lg sm:text-xl font-mono text-white hover:text-primary transition-colors duration-100"
+        >
+          &rarr; {{ email }}
+        </a>
+      </div>
+
+      <!-- Socials -->
+      <div class="flex items-center gap-6 pt-6 border-t border-brand-border">
+        <a 
+          v-if="githubUrl" 
+          :href="githubUrl" 
+          target="_blank" 
+          class="text-xs font-mono uppercase tracking-widest text-brand-muted hover:text-primary transition-colors duration-100"
+        >
+          &rarr; GitHub
+        </a>
+        <a 
+          v-if="linkedinUrl" 
+          :href="linkedinUrl" 
+          target="_blank" 
+          class="text-xs font-mono uppercase tracking-widest text-brand-muted hover:text-primary transition-colors duration-100"
+        >
+          &rarr; LinkedIn
+        </a>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script setup>
 defineProps({
-    email: String
+    email: String,
+    githubUrl: String,
+    linkedinUrl: String
 });
 </script>
 
 <style scoped>
-.glass-card {
-    background: rgba(255, 255, 255, 0.03) !important;
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
-}
-.primary-btn-glow {
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.5) !important;
-}
-.hover-lift {
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-.hover-lift:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 30px -5px rgba(99, 102, 241, 0.3) !important;
-}
-.blob {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(120px);
-    opacity: 0.15;
-    z-index: 0;
-    pointer-events: none;
-}
-.blob-3 {
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 600px; height: 600px;
-    background: #4f46e5;
-    opacity: 0.2;
-}
 </style>

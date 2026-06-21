@@ -1,86 +1,95 @@
 <template>
-  <v-navigation-drawer v-model="drawerModel" class="glass-drawer border-0" elevation="10" width="280">
-    <div class="pa-6 text-center">
-       <h2 class="font-weight-black outfit-font text-h5 mb-1 logo-text">Port<span class="text-primary">folio.</span> CMS</h2>
-    </div>
-    
-    <v-divider class="mb-4 border-opacity-25"></v-divider>
-    
-    <v-list class="px-3" nav>
-      <Link :href="route('admin.projects.index')" class="text-decoration-none text-white">
-        <v-list-item
-          prepend-icon="mdi-rocket-launch"
-          title="Projects"
-          :active="route().current('admin.projects.*')"
-          color="primary"
-          rounded="xl"
-          class="mb-2 hover-lift font-weight-medium"
-        ></v-list-item>
-      </Link>
-      <Link :href="route('admin.technologies.index')" class="text-decoration-none text-white">
-        <v-list-item
-          prepend-icon="mdi-layers"
-          title="Technologies"
-          :active="route().current('admin.technologies.*')"
-          color="primary"
-          rounded="xl"
-          class="mb-2 hover-lift font-weight-medium"
-        ></v-list-item>
-      </Link>
-      <Link :href="route('admin.profile.edit')" class="text-decoration-none text-white">
-        <v-list-item
-          prepend-icon="mdi-account-circle"
-          title="Portfolio Profile"
-          :active="route().current('admin.profile.*')"
-          color="primary"
-          rounded="xl"
-          class="mb-2 hover-lift font-weight-medium"
-        ></v-list-item>
-      </Link>
-    </v-list>
-    
-    <div class="pa-4 position-absolute text-center w-100" style="bottom: 0;">
-        <Link href="/" class="text-decoration-none w-100">
-           <v-btn block variant="tonal" rounded="pill" color="primary" class="font-weight-bold hover-lift text-none" prepend-icon="mdi-web">
-              View Public Site
-           </v-btn>
-        </Link>
-    </div>
-  </v-navigation-drawer>
+    <v-navigation-drawer
+        v-model="drawerModel"
+        class="bg-black border-r border-brand-border"
+        width="280"
+    >
+        <!-- Header Logo -->
+        <div class="p-4 mt-1 text-center border-b border-brand-border">
+            <Link
+                href="/"
+                class="text-xl font-serif font-black tracking-tight text-white hover:opacity-80 transition-opacity"
+            >
+                H. CMS
+            </Link>
+        </div>
+
+        <!-- Navigation List -->
+        <div class="p-4 space-y-2">
+            <!-- Projects -->
+            <Link
+                :href="route('admin.projects.index')"
+                class="no-underline block"
+            >
+                <div
+                    :class="[
+                        'px-4 py-3 text-xs font-mono uppercase tracking-widest border transition-all duration-100 cursor-pointer',
+                        route().current('admin.projects.*') ? 'bg-primary text-black border-primary font-bold' : 'bg-transparent text-brand-muted border-transparent hover:text-primary hover:border-brand-border',
+                    ]"
+                >
+                    Projects
+                </div>
+            </Link>
+
+            <!-- Technologies -->
+            <Link
+                :href="route('admin.technologies.index')"
+                class="no-underline block"
+            >
+                <div
+                    :class="[
+                        'px-4 py-3 text-xs font-mono uppercase tracking-widest border transition-all duration-100 cursor-pointer',
+                        route().current('admin.technologies.*') ? 'bg-primary text-black border-primary font-bold' : 'bg-transparent text-brand-muted border-transparent hover:text-primary hover:border-brand-border',
+                    ]"
+                >
+                    Technologies
+                </div>
+            </Link>
+
+            <!-- Profile -->
+            <Link
+                :href="route('admin.profile.edit')"
+                class="no-underline block"
+            >
+                <div
+                    :class="[
+                        'px-4 py-3 text-xs font-mono uppercase tracking-widest border transition-all duration-100 cursor-pointer',
+                        route().current('admin.profile.*') ? 'bg-primary text-black border-primary font-bold' : 'bg-transparent text-brand-muted border-transparent hover:text-primary hover:border-brand-border',
+                    ]"
+                >
+                    Portfolio Profile
+                </div>
+            </Link>
+        </div>
+
+        <!-- Footer Link -->
+        <div class="p-4 absolute bottom-0 w-full border-t border-brand-border bg-brand-surface">
+            <Link
+                href="/"
+                class="no-underline block"
+            >
+                <div class="border border-brand-border text-xs font-mono uppercase tracking-widest text-brand-muted hover:text-primary hover:border-primary px-4 py-3 text-center transition-all duration-100 cursor-pointer">
+                    View Public Site &rarr;
+                </div>
+            </Link>
+        </div>
+    </v-navigation-drawer>
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import { Link } from '@inertiajs/vue3';
+    import { computed } from "vue";
+    import { Link } from "@inertiajs/vue3";
 
-const props = defineProps({
-    modelValue: Boolean
-});
+    const props = defineProps({
+        modelValue: Boolean,
+    });
 
-const emit = defineEmits(['update:modelValue']);
+    const emit = defineEmits(["update:modelValue"]);
 
-const drawerModel = computed({
-    get: () => props.modelValue,
-    set: (val) => emit('update:modelValue', val)
-});
+    const drawerModel = computed({
+        get: () => props.modelValue,
+        set: (val) => emit("update:modelValue", val),
+    });
 </script>
 
-<style scoped>
-.glass-drawer {
-  background: rgba(13, 17, 23, 0.6) !important;
-  backdrop-filter: blur(20px);
-  border-right: 1px solid rgba(255, 255, 255, 0.05) !important;
-}
-.logo-text {
-  background: linear-gradient(to right, #ffffff, #a5b4fc);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-.hover-lift {
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-.hover-lift:hover {
-    transform: translateX(4px);
-    background: rgba(99, 102, 241, 0.1) !important;
-}
-</style>
+<style scoped></style>

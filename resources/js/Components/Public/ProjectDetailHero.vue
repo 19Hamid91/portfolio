@@ -1,18 +1,30 @@
 <template>
-  <div class="project-hero position-relative">
-     <v-img :src="thumbnailUrl || 'https://via.placeholder.com/1200x600'" height="50vh" cover class="hero-bg"></v-img>
-     <div class="hero-overlay d-flex align-end pb-12">
-        <v-container>
-          <Link href="/" class="text-decoration-none">
-              <v-btn variant="text" color="white" prepend-icon="mdi-arrow-left" class="mb-6 hover-lift text-none font-weight-bold">
-                  Back to all projects
-              </v-btn>
-          </Link>
-          <h1 class="text-h3 text-md-h2 font-weight-black text-white outfit-font mb-4 proj-title" style="max-width: 800px;">
-              {{ title }}
-          </h1>
-        </v-container>
-     </div>
+  <div class="w-full border-b border-brand-border bg-black flex flex-col md:grid md:grid-cols-12 min-h-[40vh] mt-0">
+    <!-- Left Column: Title & Navigation -->
+    <div class="col-span-12 md:col-span-7 p-6 md:p-12 lg:p-16 flex flex-col justify-between">
+      <div>
+        <Link href="/" class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-brand-muted hover:text-primary mb-8 group cursor-pointer">
+          <span class="group-hover:-translate-x-1 transition-transform duration-100">&larr;</span> Back to index
+        </Link>
+        
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-serif font-black text-white leading-tight max-w-2xl mt-4">
+          {{ title }}
+        </h1>
+      </div>
+      
+      <div class="text-[10px] font-mono uppercase tracking-widest text-brand-muted mt-8 md:mt-0">
+        Project Case Study
+      </div>
+    </div>
+
+    <!-- Right Column: Thumbnail Image -->
+    <div class="col-span-12 md:col-span-5 border-t md:border-t-0 md:border-l border-brand-border bg-brand-subtle overflow-hidden flex items-center justify-center">
+      <img 
+        :src="thumbnailUrl || 'https://via.placeholder.com/1200x600'" 
+        :alt="title"
+        class="w-full h-full min-h-[300px] object-cover grayscale contrast-110 filter"
+      />
+    </div>
   </div>
 </template>
 
@@ -26,36 +38,4 @@ defineProps({
 </script>
 
 <style scoped>
-.project-hero {
-    margin-top: -80px; /* pull up behind nav */
-}
-
-.hero-bg {
-    filter: brightness(0.6);
-}
-
-.hero-overlay {
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: linear-gradient(to bottom, rgba(13,17,23,0) 0%, rgba(13,17,23,0.8) 50%, rgba(13,17,23,1) 100%);
-}
-
-.proj-title {
-    text-shadow: 0 4px 20px rgba(0,0,0,0.5);
-    animation: slideUp 0.8s ease forwards;
-}
-
-@keyframes slideUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.hover-lift {
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-.hover-lift:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4) !important;
-}
 </style>

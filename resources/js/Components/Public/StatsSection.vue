@@ -1,25 +1,25 @@
 <template>
-  <div class="bg-surface-variant py-12 mt-10 border-top border-bottom border-white border-opacity-20" style="background: rgba(0,0,0,0.3) !important;">
-     <v-container style="max-width: 1200px;">
-         <v-row class="text-center">
-            <v-col cols="6" md="3" class="mb-4 mb-md-0">
-               <h2 class="text-h3 font-weight-black gradient-text outfit-font">3+</h2>
-               <p class="text-subtitle-1 text-grey font-weight-medium">Years Experience</p>
-            </v-col>
-            <v-col cols="6" md="3" class="mb-4 mb-md-0">
-               <h2 class="text-h3 font-weight-black gradient-text outfit-font">{{ projectCount }}</h2>
-               <p class="text-subtitle-1 text-grey font-weight-medium">Projects Built</p>
-            </v-col>
-            <v-col cols="6" md="3">
-               <h2 class="text-h3 font-weight-black gradient-text outfit-font">{{ techCount }}+</h2>
-               <p class="text-subtitle-1 text-grey font-weight-medium">Tools & Skills</p>
-            </v-col>
-            <v-col cols="6" md="3">
-               <h2 class="text-h3 font-weight-black gradient-text outfit-font">100%</h2>
-               <p class="text-subtitle-1 text-grey font-weight-medium">Dedication</p>
-            </v-col>
-         </v-row>
-     </v-container>
+  <div class="w-full border-b border-brand-border bg-black grid grid-cols-2 md:grid-cols-4">
+    <!-- Stat 1 -->
+    <div class="p-6 md:p-8 flex flex-col justify-center border-r border-b md:border-b-0 border-brand-border">
+       <h2 class="text-3xl md:text-4xl font-mono font-bold text-primary mb-2">3+</h2>
+       <p class="text-[10px] font-mono uppercase tracking-widest text-brand-muted">Years Experience</p>
+    </div>
+    <!-- Stat 2 -->
+    <div class="p-6 md:p-8 flex flex-col justify-center md:border-r border-b md:border-b-0 border-brand-border">
+       <h2 class="text-3xl md:text-4xl font-mono font-bold text-primary mb-2">{{ projectCount }}</h2>
+       <p class="text-[10px] font-mono uppercase tracking-widest text-brand-muted">Projects Built</p>
+    </div>
+    <!-- Stat 3 -->
+    <div class="p-6 md:p-8 flex flex-col justify-center border-r border-brand-border">
+       <h2 class="text-3xl md:text-4xl font-mono font-bold text-primary mb-2">{{ techCount }}+</h2>
+       <p class="text-[10px] font-mono uppercase tracking-widest text-brand-muted">Tools &amp; Skills</p>
+    </div>
+    <!-- Stat 4 -->
+    <div class="p-6 md:p-8 flex flex-col justify-center">
+       <h2 class="text-3xl md:text-4xl font-mono font-bold text-primary mb-2">100%</h2>
+       <p class="text-[10px] font-mono uppercase tracking-widest text-brand-muted">Dedication</p>
+    </div>
   </div>
 </template>
 
@@ -37,9 +37,4 @@ defineProps({
 </script>
 
 <style scoped>
-.gradient-text {
-    background: linear-gradient(135deg, #ffffff 0%, #a5b4fc 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
 </style>

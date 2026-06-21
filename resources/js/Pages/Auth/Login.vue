@@ -1,13 +1,19 @@
 <template>
     <GuestLayout>
         <Head title="Log in" />
-        <v-card class="glass-card pa-8 rounded-xl border-0 w-100" max-width="450" elevation="24">
-            <div class="text-center mb-8">
-               <h1 class="font-weight-black outfit-font text-h4 mb-2 logo-text">Port<span class="text-primary">folio.</span></h1>
-               <p class="text-grey-lighten-1">Login to CMS Dashboard</p>
+        <v-card
+            class="bg-brand-surface border border-brand-border pa-8 w-100"
+            max-width="450"
+        >
+            <div class="mb-8">
+                <h1 class="font-serif font-black text-3xl mb-2 text-white">H. CMS</h1>
+                <p class="text-xs font-mono uppercase tracking-widest text-brand-muted">Administration Login</p>
             </div>
-            
-            <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
+
+            <div
+                v-if="status"
+                class="mb-4 font-mono text-xs text-primary"
+            >
                 {{ status }}
             </div>
 
@@ -18,40 +24,45 @@
                     type="email"
                     variant="outlined"
                     color="primary"
-                    bg-color="rgba(0,0,0,0.2)"
-                    prepend-inner-icon="mdi-email"
                     :error-messages="form.errors.email"
                     required
                     autofocus
+                    class="font-mono text-xs"
                 ></v-text-field>
 
                 <v-text-field
                     v-model="form.password"
                     label="Password"
-                    type="password"
+                    :type="showPassword ? 'text' : 'password'"
                     variant="outlined"
                     color="primary"
-                    bg-color="rgba(0,0,0,0.2)"
-                    prepend-inner-icon="mdi-lock"
+                    :append-inner-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                    @click:append-inner="showPassword = !showPassword"
                     :error-messages="form.errors.password"
                     required
-                    class="mt-4"
+                    class="mt-4 font-mono text-xs"
                 ></v-text-field>
 
                 <div class="d-flex align-center justify-space-between mt-2 mb-6">
-                    <v-checkbox v-model="form.remember" label="Remember me" color="primary" hide-details class="mt-0"></v-checkbox>
+                    <v-checkbox
+                        v-model="form.remember"
+                        label="Remember me"
+                        color="primary"
+                        hide-details
+                        class="mt-0 font-mono text-xs text-brand-muted"
+                    ></v-checkbox>
                 </div>
 
                 <v-btn
                     type="submit"
                     block
                     color="primary"
-                    rounded="pill"
-                    size="x-large"
-                    class="font-weight-bold tracking-widest text-none primary-btn-glow"
+                    size="large"
+                    class="font-mono text-xs uppercase tracking-widest text-black hover:bg-primary-hover hover:border-primary-hover"
                     :loading="form.processing"
+                    flat
                 >
-                    Log in
+                    Log in &rarr;
                 </v-btn>
             </v-form>
         </v-card>
@@ -59,29 +70,17 @@
 </template>
 
 <script setup>
-import GuestLayout from '@/Layouts/GuestLayout.vue';
-import { Head, useForm } from '@inertiajs/vue3';
+    import { ref } from "vue";
+    import GuestLayout from "@/Layouts/GuestLayout.vue";
+    import { Head, useForm } from "@inertiajs/vue3";
 
-defineProps({ status: String });
+    defineProps({ status: String });
 
-const form = useForm({ email: '', password: '', remember: false });
-const submit = () => { form.post(route('login'), { onFinish: () => form.reset('password') }); };
+    const showPassword = ref(false);
+    const form = useForm({ email: "", password: "", remember: false });
+    const submit = () => {
+        form.post(route("login"), { onFinish: () => form.reset("password") });
+    };
 </script>
 
-<style scoped>
-.glass-card {
-  background: rgba(31, 28, 44, 0.6) !important;
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.12) !important;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
-}
-.primary-btn-glow {
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4) !important;
-}
-.logo-text {
-  background: linear-gradient(to right, #ffffff, #a5b4fc);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-</style>
+<style scoped></style>

@@ -1,65 +1,66 @@
 <template>
-  <v-container class="py-16 mt-10" id="projects-section" style="max-width: 1400px;">
-      <div class="d-flex align-center mb-10">
-          <div>
-            <h4 class="text-body-1 text-primary font-weight-bold tracking-widest text-uppercase mb-2">Portfolio</h4>
-            <h2 class="text-h3 font-weight-black text-white outfit-font">
-              Featured <span class="gradient-text">Works</span>
-            </h2>
-          </div>
-          <v-spacer></v-spacer>
-          <div class="h-line opacity-30 mt-8 hidden-sm-and-down"></div>
+  <section class="w-full border-b border-brand-border bg-black py-16 px-6 md:px-12" id="projects-section">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+      <div>
+        <h4 class="text-xs font-mono uppercase tracking-widest text-brand-muted mb-2">Portfolio</h4>
+        <h2 class="text-3xl md:text-4xl font-serif font-black text-white">Selected Works</h2>
       </div>
       
-      <!-- Filter Bar -->
-      <div class="mb-12 glass-card pa-6 rounded-xl" v-if="technologies?.length">
-          <div class="d-flex align-center justify-space-between mb-4">
-              <span class="text-body-1 font-weight-bold text-white">Filter by Technology:</span>
-              <v-btn 
-                 v-if="selectedTechs.length > 0" 
-                 @click="clearFilters" 
-                 variant="text" 
-                 color="error" 
-                 size="small" 
-                 prepend-icon="mdi-close-circle"
-                 class="text-none font-weight-bold"
-              >Clear Filters</v-btn>
-          </div>
-          <div class="d-flex flex-wrap gap-3">
-              <v-chip 
-                 v-for="tech in technologies" 
-                 :key="'filter-'+tech.id" 
-                 :color="selectedTechs.includes(tech.id) ? 'primary' : 'white'"
-                 :variant="selectedTechs.includes(tech.id) ? 'elevated' : 'outlined'"
-                 class="font-weight-medium border-opacity-25 hover-lift"
-                 size="large"
-                 @click="toggleTech(tech.id)"
-                 style="cursor: pointer;"
-              >
-                 <v-avatar start v-if="tech.icon_url">
-                    <v-img :src="tech.icon_url" cover></v-img>
-                 </v-avatar>
-                 {{ tech.name }}
-              </v-chip>
-          </div>
+      <!-- Reset helper -->
+      <button 
+        v-if="selectedTechs.length > 0" 
+        @click="clearFilters" 
+        class="border border-primary text-primary px-4 py-2 text-[10px] font-mono uppercase tracking-widest hover:bg-primary-hover hover:text-black hover:border-primary-hover transition-colors duration-100 self-start md:self-auto cursor-pointer"
+      >
+        Clear Filters
+      </button>
+    </div>
+    
+    <!-- Filter Bar -->
+    <div class="mb-12 border border-brand-border bg-brand-surface p-6" v-if="technologies?.length">
+      <div class="text-xs font-mono uppercase tracking-widest text-brand-muted mb-4">Filter by Tech Stack</div>
+      <div class="flex flex-wrap gap-2">
+        <button 
+          v-for="tech in technologies" 
+          :key="'filter-'+tech.id" 
+          @click="toggleTech(tech.id)"
+          :class="[
+            'px-3 py-1.5 text-xs font-mono uppercase tracking-widest border transition-colors duration-100 cursor-pointer',
+            selectedTechs.includes(tech.id) 
+              ? 'bg-primary text-black border-primary' 
+              : 'bg-transparent text-brand-muted border-brand-border hover:text-primary hover:border-primary'
+          ]"
+        >
+          {{ tech.name }}
+        </button>
       </div>
-
-      <!-- Filter Count Helper -->
-      <div v-if="selectedTechs.length > 0" class="mb-8 text-primary font-weight-bold">
-          Showing {{ filteredProjects.length }} project(s) matching your filters.
+    </div>
+ 
+    <!-- Filter Count Helper -->
+    <div v-if="selectedTechs.length > 0" class="mb-6 text-xs font-mono uppercase tracking-wider text-white">
+      Showing {{ filteredProjects.length }} project(s) matching selected criteria.
+    </div>
+    
+    <!-- Editorial Border Grid -->
+    <div v-if="filteredProjects.length" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-t border-l border-brand-border">
+      <div 
+        v-for="(project, index) in filteredProjects" 
+        :key="project.id" 
+        class="border-r border-b border-brand-border"
+      >
+        <ProjectCard :project="project" :index="index" />
       </div>
-      
-      <v-row v-if="filteredProjects.length">
-        <v-col cols="12" md="6" lg="4" v-for="(project, index) in filteredProjects" :key="project.id" class="mb-8">
-          <ProjectCard :project="project" :index="index" />
-        </v-col>
-      </v-row>
-      <div v-else class="text-center py-16 glass-card rounded-xl mx-auto" style="max-width: 800px;">
-          <v-icon size="80" color="error" class="mb-6 opacity-60">mdi-text-box-search-outline</v-icon>
-          <h3 class="text-h4 font-weight-bold text-white outfit-font">No matches found</h3>
-          <p class="text-body-1 text-grey-lighten-1 mt-4">Try clearing your filters or selecting different technologies.</p>
-      </div>
-  </v-container>
+    </div>
+    
+    <!-- Empty State -->
+    <div v-else class="text-center py-20 border border-brand-border bg-brand-surface max-w-3xl mx-auto">
+      <svg class="w-12 h-12 text-brand-muted mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+      </svg>
+      <h3 class="text-lg font-serif text-white mb-2">No matching projects</h3>
+      <p class="text-sm text-brand-muted font-mono">Try selecting a different combination of technologies.</p>
+    </div>
+  </section>
 </template>
 
 <script setup>
@@ -71,7 +72,6 @@ const props = defineProps({
     technologies: Array
 });
 
-// Feature: Multi-select filtering
 const selectedTechs = ref([]);
 
 const toggleTech = (techId) => {
@@ -87,12 +87,10 @@ const clearFilters = () => {
     selectedTechs.value = [];
 };
 
-// Filtered projects computed property
 const filteredProjects = computed(() => {
     if (selectedTechs.value.length === 0) return props.projects;
     
     return props.projects.filter(project => {
-        // Find if project has ALL selected tech IDs
         const projectTechIds = project.technologies.map(t => t.id);
         return selectedTechs.value.every(id => projectTechIds.includes(id));
     });
@@ -100,27 +98,4 @@ const filteredProjects = computed(() => {
 </script>
 
 <style scoped>
-.gradient-text {
-    background: linear-gradient(135deg, #ffffff 0%, #a5b4fc 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-.glass-card {
-    background: rgba(255, 255, 255, 0.03) !important;
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
-}
-.hover-lift {
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-.hover-lift:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3) !important;
-}
-.h-line {
-    flex-grow: 1;
-    height: 2px;
-    margin-left: 30px;
-    background: linear-gradient(to right, rgba(99,102,241,0.5), transparent);
-}
 </style>

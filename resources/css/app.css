@@ -2,40 +2,143 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Fix Tailwind Forms plugin forced styles interfering with Vuetify Inputs */
-.v-application input,
-.v-application textarea,
-.v-application select,
+:root {
+    --color-primary: #f59e0b;
+    --color-primary-hover: #d97706;
+    --color-secondary: #94a3b8;
+    --color-bg-base: #000000;
+    --color-bg-surface: #0a0a0a;
+    --color-bg-subtle: #171717;
+    --color-border: #1f1f1f;
+    --color-border-focus: #f59e0b;
+    --color-text-primary: #ffffff;
+    --color-text-muted: #a3a3a3;
+    --color-text-disabled: #404040;
+    --color-text-on-primary: #000000;
+}
+
+/* --- Stark Brutalist Design Resets --- */
+* {
+    border-radius: 0px !important;
+    box-shadow: none !important;
+}
+
+/* Base Body Styles */
+body {
+    background-color: var(--color-bg-base) !important;
+    color: var(--color-text-primary) !important;
+    font-family: "Inter", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typographic Line Height & Spacing Optimization for Editorial Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Playfair Display", serif;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+}
+
+/* Custom Scrollbar styling */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: var(--color-bg-base);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-primary);
+}
+
+/* Snappy transitions */
+.transition-snappy {
+    transition: all 120ms ease-out;
+}
+
+/* Vuetify Overrides to completely remove Material Design UI elements */
+.v-application,
+.v-application__wrap {
+    background-color: var(--color-bg-base) !important;
+    color: var(--color-text-primary) !important;
+    font-family: "Inter", sans-serif !important;
+}
+
+.v-app-bar,
+.v-navigation-drawer,
+.v-chip,
+.v-field {
+    background-color: transparent !important;
+    border-color: var(--color-border) !important;
+    box-shadow: none !important;
+    border-radius: 0px !important;
+}
+
+.v-card,
+.v-btn {
+    border-color: var(--color-border) !important;
+    box-shadow: none !important;
+    border-radius: 0px !important;
+}
+
+/* Fix Tailwind Forms adding default borders to Vuetify input elements */
 .v-field input,
 .v-field textarea,
 .v-field select {
-    background-color: transparent !important;
     border: none !important;
     box-shadow: none !important;
-}
-
-.v-application input:focus,
-.v-application textarea:focus,
-.v-application select:focus,
-.v-field input:focus,
-.v-field textarea:focus,
-.v-field select:focus {
-    box-shadow: none !important;
-    border: none !important;
     outline: none !important;
-}
-
-/* Fix Browser Autofill "White/Blue Background" in Dark Mode */
-input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
-input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 1000px rgba(13, 17, 23, 0.8) inset !important;
-    -webkit-text-fill-color: white !important;
-    transition: background-color 5000s ease-in-out 0s;
-}
-
-/* Ensure Vuetify field components don't have conflicting autofill styles */
-.v-field--focused .v-field__input:-webkit-autofill {
     background-color: transparent !important;
+}
+
+/* Ensure outlined text fields always display their 1px borders */
+.v-field--variant-outlined .v-field__outline__start,
+.v-field--variant-outlined .v-field__outline__notch,
+.v-field--variant-outlined .v-field__outline__end {
+    border-top: 1px solid var(--color-border) !important;
+    border-bottom: 1px solid var(--color-border) !important;
+    opacity: 1 !important;
+}
+
+.v-field--variant-outlined .v-field__outline__start {
+    border-left: 1px solid var(--color-border) !important;
+}
+
+.v-field--variant-outlined .v-field__outline__end {
+    border-right: 1px solid var(--color-border) !important;
+}
+
+/* Ensure focus states use primary color */
+.v-field--focused .v-field__outline__start,
+.v-field--focused .v-field__outline__notch,
+.v-field--focused .v-field__outline__end {
+    border-top-color: var(--color-primary) !important;
+    border-bottom-color: var(--color-primary) !important;
+}
+
+.v-field--focused .v-field__outline__start {
+    border-left-color: var(--color-primary) !important;
+}
+
+.v-field--focused .v-field__outline__end {
+    border-right-color: var(--color-primary) !important;
+}
+
+
+/* Fix Browser Autofill in Dark Mode */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px #000000 inset !important;
+    -webkit-text-fill-color: #ffffff !important;
+    transition: background-color 5000s ease-in-out 0s;
 }

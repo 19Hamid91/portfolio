@@ -1,24 +1,42 @@
 <template>
-  <v-app-bar 
-    app 
-    elevation="0" 
-    class="glass-nav px-md-10" 
-    height="80"
-  >
-    <v-toolbar-title class="font-weight-black outfit-font text-h4">
-      <Link href="/" class="text-decoration-none logo-text">
-        Port<span class="text-primary">folio.</span>
+  <header class="w-full h-20 border-b border-brand-border bg-black flex items-center justify-between px-6 md:px-12 sticky top-0 z-50">
+    <!-- Serif Logo -->
+    <div class="flex items-center">
+      <Link href="/" class="text-2xl font-serif font-black tracking-tighter text-white hover:text-primary transition-colors duration-100">
+        H.
       </Link>
-    </v-toolbar-title>
-    <v-spacer></v-spacer>
-    <div v-if="$page.props.auth.user" class="hidden-sm-and-down">
-       <Link :href="route('admin.projects.index')" class="text-decoration-none">
-          <v-btn variant="outlined" color="primary" rounded="pill" class="px-6 font-weight-bold">
-             CMS Dashboard
-          </v-btn>
-       </Link>
     </div>
-  </v-app-bar>
+
+    <!-- Navigation Links & Actions -->
+    <nav class="flex items-center gap-6 md:gap-8">
+      <a 
+        href="#projects-section" 
+        class="text-xs font-mono uppercase tracking-widest text-brand-muted hover:text-primary transition-colors duration-100"
+      >
+        Works
+      </a>
+      <a 
+        href="#about-section" 
+        class="text-xs font-mono uppercase tracking-widest text-brand-muted hover:text-primary transition-colors duration-100"
+      >
+        About
+      </a>
+      <a 
+        href="#contact-section" 
+        class="text-xs font-mono uppercase tracking-widest text-brand-muted hover:text-primary transition-colors duration-100"
+      >
+        Contact
+      </a>
+      
+      <Link 
+        v-if="$page.props.auth?.user" 
+        :href="route('admin.projects.index')" 
+        class="border border-primary text-primary px-4 py-2 text-xs font-mono uppercase tracking-widest hover:bg-primary hover:text-black transition-colors duration-100"
+      >
+        Dashboard
+      </Link>
+    </nav>
+  </header>
 </template>
 
 <script setup>
@@ -26,18 +44,5 @@ import { Link } from '@inertiajs/vue3';
 </script>
 
 <style scoped>
-.glass-nav {
-  background: rgba(13, 17, 23, 0.7) !important;
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
-}
-.logo-text {
-  background: linear-gradient(to right, #ffffff, #a5b4fc);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  transition: all 0.3s ease;
-}
-.logo-text:hover {
-  filter: brightness(1.2);
-}
+/* Snappy interactions */
 </style>
